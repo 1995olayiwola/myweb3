@@ -11,18 +11,18 @@ function Home(Props) {
              <img src={local} className="home__image"/>
              
              <div className="home__row">
-                 <Product id="1" title="Semo vita" image={img4} price="1500"rating={5}/>
-                  <Product id="2" title="Semo vita" image={img4} price="1000"rating={5}/>
+                 <Product id="1" title="Semo vita" image={img4} price={1500} rating={5}/>
+                  <Product id="2" title="Semo vita" image={img4} price={1500} rating={5}/>
                  
                  
              </div> 
              <div className="home__row">
-                  <Product id="3" title="Semo vita" image={img4} price="1500"rating={5}/>
-                   <Product id="4"title="Semo vita" image={img4} price="1500"rating={5}/>
-                    <Product id="5" title="Semo vita" image={img4} price="1500"rating={5}/>
+                  <Product id="3" title="Semo vita" image={img4} price={1500} rating={5}/>
+                   <Product id="4"title="Semo vita" image={img4} price={1500} rating={5}/>
+                    <Product id="5" title="Semo vita" image={img4} price={1500}  rating={5}/>
              </div>
              <div className="home__row">
-                 <Product id="6"  title="Semo vita" image={img4} price="1500"rating={5}/>
+                 <Product id="6"  title="Semo vita" image={img4} price={1500} rating={5}/>
              </div> 
         </div>
         </div>

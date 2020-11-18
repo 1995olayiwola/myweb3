@@ -1,51 +1,54 @@
-import React from 'react';
-import './Login.css';
-import fgcm from './images/fgcm.jpeg';
-import {Link,useHistory} from 'react-router-dom';
-import {useStateValue} from './StateProvider'
-import {Email} from '@material-ui/icons';
-import {auth} from './firebase';
-
+import React, {useState} from 'react'
+import "./Login.css"
+import {Link, useHistory} from "react-router-dom"
+import {auth} from "./firebase";
+import fgcm from './images/fgcm.jpeg'
 function Login() {
-   const history=useHistory();
-    const[email,setEmail]=useStateValue('');
-       const[password,setPassword]=useStateValue('');
-       const signIn = (e)=>{
-e.preventDefault();
-       }
-       const register = e=>{
-           e.preventDefault();
-           auth
-           .createUserWithEmailAndPassword(email,password)
-           .then((auth)=>{
-               console.log(auth);
-               if(auth){
-                   history.push("/");
-               }
-           })
-           .catch(error=>alert(error.message))
-       }
+    const history = useHistory()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const signIn = (event) => {
+        event.preventDefault()
+        auth.signInWithEmailAndPassword(email, password)
+            .then( auth => {
+                //redirect to home page
+                history.push("/")
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+    }
+    const register = (event) => {
+        event.preventDefault()
+        auth.createUserWithEmailAndPassword(email, password)
+            .then(auth => {
+                //create a user, login and redirect to homepage
+                history.push("/")
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+    }
     return (
         <div className="login">
             <Link to="/">
-    <img src={fgcm} className="login__logo"/>
-    </Link>
-    <div className="login__container">
-<h2>Sign in</h2>
-<form>
-    <h5>Email</h5>
-    <input type="text" value={email} onChange={e=>setEmail(e.target.value)}/>
-    <h5>Password</h5>
-    <input type="password" value={password} onChange={e=>setPassword(e.target.value)}/>
-    <button type="submit" onClick={signIn}
-    className="login__sighInButton">Sign In</button>
-    <p>By signing in, you agree to FPMC policy, terms & conditions of sale!!! </p>
-    <button onClick={register}
-    className="login__registerButton"> You don't have account, Create now!!!</button>
-</form>
-    </div>
+                <img src={fgcm} alt="" className="login__logo"/>
+            </Link>
+            <div className="login__container">
+                <h1>Sign in</h1>
+                <form>
+                    <h5>Email:</h5>
+                    <input value={email} onChange={event => setEmail(event.target.value)} type="email"/>
+                    <h5>Password:</h5>
+                    <input value={password} onChange={event => setPassword(event.target.value)} type="password"/>
+                    <button type="submit" onClick={signIn}  className="login__sighInButton">sign in</button>
+                    <p>
+                      You must agree to the terms & condition lay down by FPCM in other to sign in 
+                    </p>
+                    <button onClick={register} className="login__registerButton">Create accout, if you have not register</button>
+                </form>
+            </div>
         </div>
     )
 }
-
-export default Login;
+export default Login

@@ -1,29 +1,35 @@
 import React from 'react';
 import './Header.css';
 import {Link} from 'react-router-dom'
-import fgcm from './images/fgcm.jpeg';
+//import fgcm from './images/fgcm.jpeg';
 import SearchIcon from '@material-ui/icons/Search';
 import { ShoppingBasketOutlined } from '@material-ui/icons';
 import { useStateValue } from './StateProvider';
+import {auth} from './firebase'
 const Header = () => {
-    const[{basket},dispatch]=useStateValue()
+    const handleAuthentication = ()=>{
+if(user){
+    auth.signOut();
+}
+    }
+    const[{basket,user},dispatch]=useStateValue()
 return(
 <div className="header">
     <Link to="/">
-<img className="header__logo" src={fgcm}/>
+<h1 className="header__logo">FPCM</h1>
 </Link>
 <div className="header__search">
 <input type="text"  className="header__searchInput"/>
 <SearchIcon className="header__searchIcon"/>
 </div>
 <div className="header__nav">
-    <Link to="/login">
-<div className="header__option">
+    <Link to={!user && "/login"}>
+<div onClick={handleAuthentication} className="header__option">
 <span className="header__optionLineOne">
     Hello, Guest
 </span>
 <span className="header__optionLineTwo">
-    Sign in
+    {user ? 'Sign Out' : 'Sign In'}
     
 
 </span>

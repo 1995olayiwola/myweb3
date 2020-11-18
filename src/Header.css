@@ -13,7 +13,8 @@
     margin: 0 20px;
     margin-top: 18px;
     margin-bottom: 10px;
-    background-color: blue;
+    color: white;
+    text-decoration: none;
 }
 .header__search{
     display: flex;
